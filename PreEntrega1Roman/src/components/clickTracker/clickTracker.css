@@ -1,0 +1,13 @@
+.divT {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.button1 {
+    align-items: left;
+    align-self: center;
+}
+
+
+
