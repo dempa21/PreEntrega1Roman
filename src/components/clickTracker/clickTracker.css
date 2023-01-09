@@ -1,13 +1,22 @@
 .divT {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
 }
 
 .button1 {
-    align-items: left;
-    align-self: center;
+    align-content: left;
+    align-self: left;
+    height: 50px;
 }
 
+.button2 {
+    align-content: right;
+    align-self: right;
+    height: 50px;
+}
+
+.texto {
+    font-size: medium;;
+    color: black;
+}
 
 

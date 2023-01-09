@@ -1,64 +1,55 @@
-import React, { useState, useEffect} from 'react';
-
+import React, { useState, useEffect } from "react";
+import ItemDetailContainer from "../../containers/itemDetailContainer/ItemDetailContainer";
 import FlexWrapper from "../flexWrapper/FlexWrapper";
 import Item from "../Item/Item";
-
 import "./ItemListContainer.css";
+// import { getSingleItem } from "../../services/mockAsyncService";
 
+const ItemListContainer = () => {
+  const [productList, setProductList] = useState([]);
 
-import imgcamiseta from "../../assets/img/camiseta.jpg";
-import imgshort from "../../assets/img/short-futbol.jpg";
-import botines from "../../assets/img/botines.jpg";
-
-function ItemListContainer() {
-  const greeting = "Bienvenidos a mi Ecommerce!";
-  const [toggle, setToggle] = useState(false);
-  const [otroToggle, setOtroToggle] = useState(false);
-
-  console.log("Renderizando ItemListContainer..", "background-color: blue");
+  async function getProducts() {
+    let respuesta = await fetch(`https://fakestoreapi.com/products/category/men's clothing`);
+    let products = await respuesta.json();
+    console.log(products);
+    setProductList(products);
+  };
 
   useEffect(() => {
-      console.log("Obteniendo items de la base de datos",
-       "background-color: green");
-       return () => console.log("Desmontando componente...")
+    getProducts();
   }, []);
 
-  useEffect(() => {
-    console.log("%cEffecto dependiente de Toggle",
-     "background-color: orange");
-}, [toggle]);
+  // useEffect(() => {
+  //   getSingleItem().then((respuesta) => {
+  //     setProduct(respuesta);
+  //   });
+  // }, []);
 
-    const productoA = {
-        title: "Camiseta",
-        price: 1200,
-        detail: "Camiseta oficial de la Argentina con tres estrellas",
-        imgurl:{imgcamiseta}
-    }
-  return <>
-  <div className="App-header">
-  {greeting}
-  </div>
-   <FlexWrapper>
-        <Item
-          title={productoA.title}
-          price={productoA.price}
-          detail={productoA.detail}
-          imgurl={imgcamiseta}
+  return (
+    <>  
+      {/* <ItemDetail */}
+      <FlexWrapper>
+      <div className="App-header">
+      {productList.map((producto) => (
+      <Item
+      // <div className="card">
+      //   <div>
+      // <h1>Titulo: {producto.title} </h1>
+      // <img src={producto.image} />
+      // <a href={producto.url}>Ver detalles</a>
+      // </div>
+      // </div>
+      key = {producto.id}
+      title = {producto.title}
+      price = {producto.price}
+      detail = {producto.detail}
+      imgurl = {producto.image}
         />
-        <Item
-          title="Short"
-          price={500}
-          detail="Short oficial de Argentinos Juniors titular color negro"
-          imgurl={imgshort}
-        />
-        <Item
-          title="Botines"
-          price={600}
-          detail="Botines Nike Zoom Mercurial Superfly 9 Academy TF"
-          imgurl={botines}
-        />
+      ))}
+      </div>
       </FlexWrapper>
-      </>;
-}
+    </>
+  );
+ }
 
-export default ItemListContainer
+export default ItemListContainer;

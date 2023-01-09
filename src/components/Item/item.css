@@ -11,6 +11,7 @@
   overflow: hidden;  
   transition: all 0.20s ease-in;
   cursor: pointer;
+  padding-right: 15px;
 }
 
 .item-card_header{
@@ -78,4 +79,8 @@ small{
 .item-card_price{
   color: #444444;
   font-weight: bold;
+}
+
+.button1 {
+  align-self: left;
 }
